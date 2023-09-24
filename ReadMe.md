@@ -14,7 +14,7 @@
 
 ## Flowchart & Guide
 (continue..)
-
+![Alt text](image.png)
 
 ## Consideration
 
