@@ -8,6 +8,7 @@ import time
 
 mp_hands = mp.solutions.hands
 hands = mp_hands.Hands()
+
 pipeline = rs.pipeline()
 config = rs.config()
 config.enable_stream(rs.stream.color, 1920, 1080, rs.format.bgr8, 30)
