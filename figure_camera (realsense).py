@@ -6,7 +6,6 @@ import os
 import json
 import time
 
-# Setup
 mp_hands = mp.solutions.hands
 hands = mp_hands.Hands()
 pipeline = rs.pipeline()
@@ -63,7 +62,7 @@ if os.path.exists(json_path):
     try:
         with open(json_path, "r") as file:
             data = json.load(file)
-            if data:  # Check if the data list is not empty
+            if data:
                 index = max(entry["index"] for entry in data) + 1
     except json.JSONDecodeError:
         print(f"Error reading {json_path}. File might be empty or corrupt. Initializing a new dataset.")
@@ -93,7 +92,7 @@ try:
         key = cv2.waitKey(1)
         if key & 0xFF == ord('q'):
             break
-        elif key == 13:  # Enter key
+        elif key == 13:  # 엔터
             if results.multi_hand_landmarks:
                 filename = os.path.join(save_path, f"{selected_char}_{index}.jpg")
                 success = cv2.imwrite(filename, color_image)

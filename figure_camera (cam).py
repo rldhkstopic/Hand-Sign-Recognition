@@ -5,7 +5,6 @@ import os
 import json
 import time
 
-# Setup
 mp_hands = mp.solutions.hands
 hands = mp_hands.Hands()
 
@@ -89,7 +88,7 @@ try:
         key = cv2.waitKey(1)
         if key & 0xFF == ord('q'):
             break
-        elif key == 13:
+        elif key == 13:  # 엔터
             if results.multi_hand_landmarks:
                 filename = os.path.join(save_path, f"{selected_char}_{index}.jpg")
                 success = cv2.imwrite(filename, color_image)
