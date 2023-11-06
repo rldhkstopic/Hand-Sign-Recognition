@@ -16,45 +16,47 @@ json_path = "dataset/hand_landmarks.json"
 if not os.path.exists(save_path):
     os.makedirs(save_path)
 
-Target = [
-            {'key' : 'ㄱ', 'eng' : 'giyeok'}, 
-            {'key' : 'ㄴ', 'eng' : 'nieun'}, 
-            {'key' : 'ㄷ', 'eng' : 'digeut'}, 
-            {'key' : 'ㄹ', 'eng' : 'rieul'}, 
-            {'key' : 'ㅁ', 'eng' : 'mieum'}, 
-            {'key' : 'ㅂ', 'eng' : 'bieup'}, 
-            {'key' : 'ㅅ', 'eng' : 'siot'}, 
-            {'key' : 'ㅇ', 'eng' : 'ieung'}, 
-            {'key' : 'ㅈ', 'eng' : 'jieut'}, 
-            {'key' : 'ㅊ', 'eng' : 'chieut'}, 
-            {'key' : 'ㅋ', 'eng' : 'kieuk'}, 
-            {'key' : 'ㅌ', 'eng' : 'tieut'}, 
-            {'key' : 'ㅍ', 'eng' : 'pieup'}, 
-            {'key' : 'ㅎ', 'eng' : 'hieut'}, 
-            {'key' : 'ㅏ', 'eng' : 'a'}, 
-            {'key' : 'ㅑ', 'eng' : 'ya'}, 
-            {'key' : 'ㅓ', 'eng' : 'eo'}, 
-            {'key' : 'ㅕ', 'eng' : 'yeo'}, 
-            {'key' : 'ㅗ', 'eng' : 'o'}, 
-            {'key' : 'ㅛ', 'eng' : 'yo'}, 
-            {'key' : 'ㅜ', 'eng' : 'u'}, 
-            {'key' : 'ㅠ', 'eng' : 'yu'}, 
-            {'key' : 'ㅡ', 'eng' : 'eu'}, 
-            {'key' : 'ㅣ', 'eng' : 'i'}, 
-            {'key' : 'ㅔ', 'eng' : 'e'}, 
-            {'key' : 'ㅖ', 'eng' : 'ye'}, 
-            {'key' : 'ㅐ', 'eng' : 'ae'}, 
-            {'key' : 'ㅡ', 'eng' : 'eu'}, 
-            {'key' : 'ㅢ', 'eng' : 'ui'}, 
-            {'key' : 'ㅚ', 'eng' : 'oe'}, 
-            {'key' : 'ㅟ', 'eng' : 'wi'}, 
+Target = [ 
+            {'key' : 'ㄱ', 'eng' : 'giyeok', 'label' : 0}, 
+            {'key' : 'ㄴ', 'eng' : 'nieun', 'label' : 1}, 
+            {'key' : 'ㄷ', 'eng' : 'digeut', 'label' : 2}, 
+            {'key' : 'ㄹ', 'eng' : 'rieul', 'label' : 3}, 
+            {'key' : 'ㅁ', 'eng' : 'mieum', 'label' : 4}, 
+            {'key' : 'ㅂ', 'eng' : 'bieup', 'label' : 5}, 
+            {'key' : 'ㅅ', 'eng' : 'siot', 'label' : 6}, 
+            {'key' : 'ㅇ', 'eng' : 'ieung', 'label' : 7}, 
+            {'key' : 'ㅈ', 'eng' : 'jieut', 'label' : 8}, 
+            {'key' : 'ㅊ', 'eng' : 'chieut', 'label' : 9}, 
+            {'key' : 'ㅋ', 'eng' : 'kieuk', 'label' : 10}, 
+            {'key' : 'ㅌ', 'eng' : 'tieut', 'label' : 11}, 
+            {'key' : 'ㅍ', 'eng' : 'pieup', 'label' : 12}, 
+            {'key' : 'ㅎ', 'eng' : 'hieut', 'label' : 13}, 
+            {'key' : 'ㅏ', 'eng' : 'a', 'label' : 14}, 
+            {'key' : 'ㅑ', 'eng' : 'ya', 'label' : 15}, 
+            {'key' : 'ㅓ', 'eng' : 'eo', 'label' : 16}, 
+            {'key' : 'ㅕ', 'eng' : 'yeo', 'label' : 17}, 
+            {'key' : 'ㅗ', 'eng' : 'o', 'label' : 18}, 
+            {'key' : 'ㅛ', 'eng' : 'yo', 'label' : 19}, 
+            {'key' : 'ㅜ', 'eng' : 'u', 'label' : 20}, 
+            {'key' : 'ㅠ', 'eng' : 'yu', 'label' : 21}, 
+            {'key' : 'ㅡ', 'eng' : 'eu', 'label' : 22}, 
+            {'key' : 'ㅣ', 'eng' : 'i', 'label' : 23}, 
+            {'key' : 'ㅔ', 'eng' : 'e', 'label' : 24}, 
+            {'key' : 'ㅖ', 'eng' : 'ye', 'label' : 25}, 
+            {'key' : 'ㅐ', 'eng' : 'ae', 'label' : 26}, 
+            {'key' : 'ㅡ', 'eng' : 'yae', 'label' : 27}, 
+            {'key' : 'ㅢ', 'eng' : 'ui', 'label' : 28}, 
+            {'key' : 'ㅚ', 'eng' : 'oe', 'label' : 29}, 
+            {'key' : 'ㅟ', 'eng' : 'wi', 'label' : 30}, 
 
         ]
 
-selected_char = Target[0]['eng']
+n = 0
+selected_char = Target[n]['eng']
 
 data = []
 index = 1
+label = 0
 if os.path.exists(json_path):
     try:
         with open(json_path, "r") as file:
@@ -86,7 +88,7 @@ try:
         cv2.imshow('Webcam Feed', color_image)
 
         key = cv2.waitKey(1)
-        if key & 0xFF == ord('q'):
+        if key & 0xFF == ord('q'): # q를 누르면 종류
             break
         elif key == 13:  # 엔터
             if results.multi_hand_landmarks:
@@ -112,6 +114,11 @@ try:
 
                 with open(json_path, "w") as file:
                     json.dump(data, file, indent=4)
+        elif key == ord('c') or key == ord('C'):
+            n += 1
+            selected_char = Target[n]['eng']
+            index = 1
+            label = Target[n]['label']
 
 finally:
     cap.release()

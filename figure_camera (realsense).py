@@ -11,7 +11,7 @@ hands = mp_hands.Hands()
 
 pipeline = rs.pipeline()
 config = rs.config()
-config.enable_stream(rs.stream.color, 1920, 1080, rs.format.bgr8, 30)
+config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
 pipeline.start(config)
 
 save_path = "dataset"
@@ -20,41 +20,43 @@ json_path = "dataset/hand_landmarks.json"
 if not os.path.exists(save_path):
     os.makedirs(save_path)
 
-Target = [
-            {'key' : 'ㄱ', 'eng' : 'giyeok'}, 
-            {'key' : 'ㄴ', 'eng' : 'nieun'}, 
-            {'key' : 'ㄷ', 'eng' : 'digeut'}, 
-            {'key' : 'ㄹ', 'eng' : 'rieul'}, 
-            {'key' : 'ㅁ', 'eng' : 'mieum'}, 
-            {'key' : 'ㅂ', 'eng' : 'bieup'}, 
-            {'key' : 'ㅅ', 'eng' : 'siot'}, 
-            {'key' : 'ㅇ', 'eng' : 'ieung'}, 
-            {'key' : 'ㅈ', 'eng' : 'jieut'}, 
-            {'key' : 'ㅊ', 'eng' : 'chieut'}, 
-            {'key' : 'ㅋ', 'eng' : 'kieuk'}, 
-            {'key' : 'ㅌ', 'eng' : 'tieut'}, 
-            {'key' : 'ㅍ', 'eng' : 'pieup'}, 
-            {'key' : 'ㅎ', 'eng' : 'hieut'}, 
-            {'key' : 'ㅏ', 'eng' : 'a'}, 
-            {'key' : 'ㅑ', 'eng' : 'ya'}, 
-            {'key' : 'ㅓ', 'eng' : 'eo'}, 
-            {'key' : 'ㅕ', 'eng' : 'yeo'}, 
-            {'key' : 'ㅗ', 'eng' : 'o'}, 
-            {'key' : 'ㅛ', 'eng' : 'yo'}, 
-            {'key' : 'ㅜ', 'eng' : 'u'}, 
-            {'key' : 'ㅠ', 'eng' : 'yu'}, 
-            {'key' : 'ㅡ', 'eng' : 'eu'}, 
-            {'key' : 'ㅣ', 'eng' : 'i'}, 
-            {'key' : 'ㅔ', 'eng' : 'e'}, 
-            {'key' : 'ㅖ', 'eng' : 'ye'}, 
-            {'key' : 'ㅐ', 'eng' : 'ae'}, 
-            {'key' : 'ㅡ', 'eng' : 'eu'}, 
-            {'key' : 'ㅢ', 'eng' : 'ui'}, 
-            {'key' : 'ㅚ', 'eng' : 'oe'}, 
-            {'key' : 'ㅟ', 'eng' : 'wi'}, 
+Target = [ 
+            {'key' : 'ㄱ', 'eng' : 'giyeok', 'label' : 0}, 
+            {'key' : 'ㄴ', 'eng' : 'nieun', 'label' : 1}, 
+            {'key' : 'ㄷ', 'eng' : 'digeut', 'label' : 2}, 
+            {'key' : 'ㄹ', 'eng' : 'rieul', 'label' : 3}, 
+            {'key' : 'ㅁ', 'eng' : 'mieum', 'label' : 4}, 
+            {'key' : 'ㅂ', 'eng' : 'bieup', 'label' : 5}, 
+            {'key' : 'ㅅ', 'eng' : 'siot', 'label' : 6}, 
+            {'key' : 'ㅇ', 'eng' : 'ieung', 'label' : 7}, 
+            {'key' : 'ㅈ', 'eng' : 'jieut', 'label' : 8}, 
+            {'key' : 'ㅊ', 'eng' : 'chieut', 'label' : 9}, 
+            {'key' : 'ㅋ', 'eng' : 'kieuk', 'label' : 10}, 
+            {'key' : 'ㅌ', 'eng' : 'tieut', 'label' : 11}, 
+            {'key' : 'ㅍ', 'eng' : 'pieup', 'label' : 12}, 
+            {'key' : 'ㅎ', 'eng' : 'hieut', 'label' : 13}, 
+            {'key' : 'ㅏ', 'eng' : 'a', 'label' : 14}, 
+            {'key' : 'ㅑ', 'eng' : 'ya', 'label' : 15}, 
+            {'key' : 'ㅓ', 'eng' : 'eo', 'label' : 16}, 
+            {'key' : 'ㅕ', 'eng' : 'yeo', 'label' : 17}, 
+            {'key' : 'ㅗ', 'eng' : 'o', 'label' : 18}, 
+            {'key' : 'ㅛ', 'eng' : 'yo', 'label' : 19}, 
+            {'key' : 'ㅜ', 'eng' : 'u', 'label' : 20}, 
+            {'key' : 'ㅠ', 'eng' : 'yu', 'label' : 21}, 
+            {'key' : 'ㅡ', 'eng' : 'eu', 'label' : 22}, 
+            {'key' : 'ㅣ', 'eng' : 'i', 'label' : 23}, 
+            {'key' : 'ㅔ', 'eng' : 'e', 'label' : 24}, 
+            {'key' : 'ㅖ', 'eng' : 'ye', 'label' : 25}, 
+            {'key' : 'ㅐ', 'eng' : 'ae', 'label' : 26}, 
+            {'key' : 'ㅡ', 'eng' : 'yae', 'label' : 27}, 
+            {'key' : 'ㅢ', 'eng' : 'ui', 'label' : 28}, 
+            {'key' : 'ㅚ', 'eng' : 'oe', 'label' : 29}, 
+            {'key' : 'ㅟ', 'eng' : 'wi', 'label' : 30}, 
 
         ]
 
+n = 0
+label = Target[n]['label']
 selected_char = Target[0]['eng']
 
 data = []
@@ -93,6 +95,7 @@ try:
         key = cv2.waitKey(1)
         if key & 0xFF == ord('q'):
             break
+
         elif key == 13:  # 엔터
             if results.multi_hand_landmarks:
                 filename = os.path.join(save_path, f"{selected_char}_{index}.jpg")
@@ -102,21 +105,33 @@ try:
 
 
                 entry = {
-                    "label": selected_char,
+                    "label": label,
                     "index": index
                 }
+                hand_data = []
                 for idx, landmark in enumerate(hand_landmarks.landmark):
-                    entry[f"point{idx}"] = {
+                    tmp= {
                         "x": landmark.x,
                         "y": landmark.y,
                         "z": landmark.z
                     }
+                    hand_data.append(tmp)
+                
+                entry["hand_data"] = hand_data
                 data.append(entry)
 
                 index += 1
+                print(f"Saved {filename}")
 
                 with open(json_path, "w") as file:
                     json.dump(data, file, indent=4)
+
+        elif key == ord('c') or key == ord('C'):
+            n += 1
+            selected_char = Target[n]['eng']
+            label = Target[n]['label']
+            index = 1
+            print(f"Selected character: {selected_char}")
 
 finally:
     pipeline.stop()
