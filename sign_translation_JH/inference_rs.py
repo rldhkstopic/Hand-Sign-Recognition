@@ -2,6 +2,7 @@ import cv2
 import mediapipe as mp
 import numpy as np
 import torch
+import pyrealsense2 as rs
 from mpl_toolkits.mplot3d import Axes3D
 from model import gesture_fc_type_vowel, gesture_fc_type_consonant, rockpaper
 from PIL import ImageFont, ImageDraw, Image
@@ -86,21 +87,21 @@ rock_list = [False, False, False, False]
 recorded_letters = ''
 hangeul = ''
 
-cap = cv2.VideoCapture(0)
+pipeline = rs.pipeline()
+config = rs.config()
+config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
+pipeline.start(config)
 try:
-    while cap.isOpened():
-        ret, frame = cap.read()
-        if not ret:
-            print("Ignoring empty camera frame.")
+    while True:
+        frames = pipeline.wait_for_frames()
+        color_frame = frames.get_color_frame()
+        if not color_frame:
             continue
-        
-        image_width = frame.shape[1]
-        color_image = cv2.flip(frame, 1) # 이미지 반전 : 필요없으면 삭제
+
+        color_image = np.asanyarray(color_frame.get_data())
+        color_image = cv2.flip(color_image, 1)
         results = hands.process(cv2.cvtColor(color_image, cv2.COLOR_BGR2RGB))
         
-
-
-
         if results.multi_hand_landmarks and len(results.multi_hand_landmarks) == 2:
             hand_landmarks_0, hand_landmarks_1 = assign_hands_by_position(results.multi_hand_landmarks, image_width)
 
@@ -111,11 +112,9 @@ try:
                 color_image, hand_landmarks_1, mp_hands.HAND_CONNECTIONS,landmark_drawing_spec_1,connection_drawing_spec_1)
                 
 
-
             # Normalize landmarks
             norm_landmarks_0 = normalize_landmarks(hand_landmarks_0.landmark)
             norm_landmarks_1 = normalize_landmarks(hand_landmarks_1.landmark)
-
 
 
             ### 왼손으로 판단하는 영역
@@ -241,6 +240,5 @@ try:
         
 
 finally:
-    cap.release()
-    hands.close()
-    cv2.destroyAllWindows()
+    pipeline.stop()
+
