@@ -1,0 +1,1 @@
+## go 'sign traslation folder'
