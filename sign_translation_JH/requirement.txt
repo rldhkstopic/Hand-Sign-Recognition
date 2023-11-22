@@ -1,5 +1,5 @@
 opencv-python
 mediapipe
 numpy
-torch
 pyrealsense2
+hangul-utils

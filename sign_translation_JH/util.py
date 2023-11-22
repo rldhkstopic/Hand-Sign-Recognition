@@ -12,17 +12,12 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 # font_path = './ttf_files/BMDOHYEON_ttf.ttf'
 # font_path = './ttf_files/BMJUA_ttf.ttf'
 # font_path = './ttf_files/NanumGothic.ttf'
-
+import os
 font_path = './ttf_files/휴먼매직체.ttf'
+# os.path.isfile(font_path)
+os.path.exists(font_path)
+
 font = ImageFont.truetype(font_path, 30)
-
-
-
-
-
-
-
-
 
 
 # Normalization
