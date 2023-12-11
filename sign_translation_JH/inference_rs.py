@@ -98,6 +98,7 @@ try:
         if not color_frame:
             continue
 
+        image_width = color_frame.get_width()
         color_image = np.asanyarray(color_frame.get_data())
         color_image = cv2.flip(color_image, 1)
         results = hands.process(cv2.cvtColor(color_image, cv2.COLOR_BGR2RGB))
